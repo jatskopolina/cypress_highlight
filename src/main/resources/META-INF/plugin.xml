@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>com.jatskopolina.cypress-highlight</id>
+    <name>cypress-highlight</name>
+    <version>0.1</version>
+    <vendor url="https://github.com/jatskopolina"/>
+
+    <description>
+        Plugin to highlight most object in cypress test files
+    </description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <group id="MyPlugin.SampleMenu" text="Cypress Highlight" description="Greeting menu">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <action id="Myplugin.Textboxes" class="HelloAction" text="Hello" description="Says hello"/>
+        </group>
+    </actions>
+</idea-plugin>
