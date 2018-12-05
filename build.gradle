@@ -24,7 +24,9 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 intellij {
-    version '2018.3'
+    pluginName 'Cypress Highlight'
+    version 'IU-LATEST-TRUNK-SNAPSHOT'
+    plugins = ['JavaScriptLanguage']
 }
 patchPluginXml {
     changeNotes """
