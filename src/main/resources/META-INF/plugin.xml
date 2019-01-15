@@ -11,15 +11,11 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>JavaScript</depends>
 
-    <actions>
-        <group id="MyPlugin.SampleMenu" text="Cypress Highlight" description="Greeting menu">
-            <add-to-group group-id="MainMenu" anchor="last"/>
-            <action id="Myplugin.Textboxes" class="com.jatskopolina.HelloAction" text="Hello" description="Says hello"/>
-        </group>
-    </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.jatskopolina.InitializationComponent" />
+        <toolWindow id="Notification time input" secondary="true" anchor="right"
+                    factoryClass="com.jatskopolina.MyToolFactory"/>
     </extensions>
+
     <project-components>
         <component>
             <implementation-class>
