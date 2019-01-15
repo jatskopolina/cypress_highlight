@@ -1,29 +1,30 @@
 <idea-plugin>
-    <id>com.jatskopolina.cypress-highlight</id>
-    <name>cypress-highlight</name>
-    <version>0.1</version>
+    <id>com.jatskopolina.time-notificator</id>
+    <name>time-notificator</name>
+    <version>0.2</version>
     <vendor url="https://github.com/jatskopolina"/>
 
     <description>
-        Plugin to highlight most object in cypress test files
+        Plugin to notify JavaScript developers about the end of their working day
     </description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
     <depends>com.intellij.modules.lang</depends>
-    -->
-
     <depends>JavaScript</depends>
-    <depends>com.intellij.modules.lang</depends>
-
-    <extensions defaultExtensionNs="com.intellij">
-    </extensions>
 
     <actions>
         <group id="MyPlugin.SampleMenu" text="Cypress Highlight" description="Greeting menu">
             <add-to-group group-id="MainMenu" anchor="last"/>
-            <action id="Myplugin.Textboxes" class="HelloAction" text="Hello" description="Says hello"/>
+            <action id="Myplugin.Textboxes" class="com.jatskopolina.HelloAction" text="Hello" description="Says hello"/>
         </group>
     </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.jatskopolina.InitializationComponent" />
+    </extensions>
+    <project-components>
+        <component>
+            <implementation-class>
+                com.jatskopolina.InitializationComponent
+            </implementation-class>
+        </component>
+    </project-components>
 </idea-plugin>

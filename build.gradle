@@ -24,7 +24,7 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 intellij {
-    pluginName 'Cypress Highlight'
+    pluginName 'Time notificator'
     version 'IU-LATEST-TRUNK-SNAPSHOT'
     plugins = ['JavaScriptLanguage']
 }
