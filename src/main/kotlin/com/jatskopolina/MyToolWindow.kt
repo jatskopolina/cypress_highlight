@@ -1,23 +1,26 @@
 package com.jatskopolina
 
+import com.intellij.ide.util.PropertiesComponent
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 
 import javax.swing.*
-import java.io.File
 
-class MyToolWindow(private val toolWindow: ToolWindow) {
+class MyToolWindow(private val toolWindow: ToolWindow, project: Project) {
     private var saveToolWindowButton: JButton? = null
     private var inputTimeTextField: JTextField? = null
     private var inputTextTextField: JTextField? = null
     var myToolWindowContent: JPanel? = null
+    private val component: PropertiesComponent = PropertiesComponent.getInstance()
+    private val publisher: ChangeActionCallback = project.messageBus.syncPublisher(ChangeActionCallback.CHANGE_ACTION)
 
     init {
-        saveToolWindowButton!!.addActionListener { saveTime() }
+        saveToolWindowButton!!.addActionListener { checkDataAndPerformActions() }
     }
 
-    private fun saveTime() {
+    private fun checkDataAndPerformActions() {
         val notification: Notification?
         val time: String = inputTimeTextField!!.text
         val message: String = inputTextTextField!!.text
@@ -33,10 +36,6 @@ class MyToolWindow(private val toolWindow: ToolWindow) {
                 NotificationType.INFORMATION
             )
             saveConfiguration(time, message)
-            /*
-            TODO use delayed task
-            docs: https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ScheduledExecutorService.html#scheduleAtFixedRate(java.lang.Runnable,%20long,%20long,%20java.util.concurrent.TimeUnit)
-            */
             toolWindow.hide(null)
         } else {
             notification = Notification(
@@ -57,13 +56,8 @@ class MyToolWindow(private val toolWindow: ToolWindow) {
     }
 
     private fun saveConfiguration(time: String, message: String) {
-        val file = File("D://timeNotificatorConfiguration.txt")
-        file.createNewFile() //creates new file if there was no such file
-        file.writeText(
-            "HOURS: " + time.substring(0, 2) + "\r\n" +
-             "MINUTES: " + time.substring(3, 5) + "\r\n" +
-             "MESSAGE: " + message
-        )
-
+        component.setValue("time", time)
+        component.setValue("message", message)
+        publisher.doAction()
     }
 }
